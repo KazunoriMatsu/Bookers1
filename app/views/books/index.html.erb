@@ -1,0 +1,53 @@
+<body>
+	<% if flash[:notice] %>
+  <p><%= flash[:notice] %></p>
+<% end %>
+	<header>
+			<h2>Books</h2>
+	</header>
+
+	<div class="table-box">
+		<table>
+			<tr>
+	      <th>Title</th>
+	      <th>Body</th>
+	    </tr>
+	    <% @books.each do |book| %>
+	    <tr>
+	      <td><%= book.title %></td>
+	      <td><%= book.body %></td>
+	      <td class="controle">
+		      <td><%= link_to 'Show', book %></td>
+		      <td><%= link_to 'Edit', edit_book_path(book) %></td>
+		      <td><%= link_to 'Destroy', book, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+		     </td>
+	    </tr>
+	    <% end %>
+	  </table>
+	</div>
+
+
+	<h3>New book</h3>
+	<!-- form_for部分 -->
+	<% @book.errors.full_messages.each do |message| %>
+ 		<p><%= message %></p>
+	<% end %>
+
+	<%= form_for(@book) do |t| %>
+
+		<h4>Title</h4>
+		<%= t.text_field :title%>
+
+		<h4>Body</h4>
+		<%= t.text_area :body%>
+		<br>
+		<%= t.submit 'Create Book'%>
+
+	<% end %>
+</body>
+
+
+
+
+
+
